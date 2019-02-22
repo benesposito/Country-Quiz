@@ -3,23 +3,37 @@
 		<title>Countries Quiz!</title>
 		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
 		<link rel="shortcut icon" href="#">
+		<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 	</head>
+
 	<body>
-		<form class="inputForm" action = "http://localhost:5000/read" method="post" autocomplete="off">
-			<p class="inputForm" id="nameP">Name: </p><input class="textfield" type="text" id="nameInput" oninput="submitForm()"/>
-			<p class="inputForm" id="capitalP">Capital: </p><input class="textfield" type="text" id="capitalInput" oninput="submitForm()"/>
-			<p class="inputForm" id="flagP">Flag: </p><img class="inputForm" id="flagInput" height="225" width="393">
-			<input class="inputForm" type="button" value="I don't know" onclick="idontknowclick()"/>
+		<form class="inputForm" autocomplete="off">
+			<p class="inputForm" id="nameP">Name: </p><input class="textfield" type="text" id="nameInput" oninput="checkInputs()"/>
+			<p class="inputForm" id="capitalP">Capital: </p><input class="textfield" type="text" id="capitalInput" oninput="checkInputs()"/>
+			<p class="inputForm" id="flagP">Flag: </p><div class="flagSelector" id="flagSelector"></div>
 		</form>
 
+		<input class="inputForm" type="button" value="I don't know" onclick="idontknowclick()"/>
+		<input class="inputForm" type="button" value="Skip" onclick="getNewCountry(false)"/>
+
+		<p>Testable Information:</p>
 		<form class="settings">
-			<p class="settings">Name</p><input class="settings" type="checkbox" id="useName" onclick="updateSettings()" checked/>
-			<p class="settings">Capital</p><input class="settings" type="checkbox" id="useCapital" onclick="updateSettings()" checked/>
-			<p class="settings">Flag</p><input class="settings" type="checkbox" id="useFlag" onclick="updateSettings()" checked/>
+			<p class="settings">Name</p><input class="settings" type="checkbox" id="testName" checked/>
+			<p class="settings">Capital</p><input class="settings" type="checkbox" id="testCapital" checked/>
+			<p class="settings">Flag</p><input class="settings" type="checkbox" id="testFlag" checked/>
+		</form>
+
+		<p>Needed Information:</p>
+		<form class="settings">
+			<p class="settings">Name</p><input class="settings" type="checkbox" id="needName" checked/>
+			<p class="settings">Capital</p><input class="settings" type="checkbox" id="needCapital" checked/>
+			<p class="settings">Flag</p><input class="settings" type="checkbox" id="needFlag" checked/>
+			<p class="settings">Number of flags</p><input class="settings" type="number" value="12" id="numerOfFlags"/>
 		</form>
 
 		<p id="discoveredCountries"></p>
 
-		<script type="text/javascript" src="{{ url_for('static', filename='js.js') }}"></script>
+		<script type="text/javascript" src="{{ url_for('static', filename='new_js.js') }}"></script>
+		<script type="text/javascript" src="{{ url_for('static', filename='removeDiacritics.js') }}"></script>
 	</body>
 </html>

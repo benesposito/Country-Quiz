@@ -1,6 +1,7 @@
 var nameInput = document.getElementById('nameInput')
 var capitalInput = document.getElementById('capitalInput');
-var flagInput = '';
+var selectedFlag = null;
+//var flagInput = document.getElementById('flagInput');
 
 var nameP = document.getElementById('nameP');
 var capitalP = document.getElementById('capitalP');
@@ -55,7 +56,7 @@ function getNextCountry() {
 				nameInput.readOnly = true;
 				capitalInput.readOnly = false;
 				flagInput.setAttribute('src', '');
-			} else if(json.givenInformation == 'capital'){
+			} else if(json.givenInformation == 'capital') {
 				capitalInput.value = selectedCountry.capital;
 				capitalInput.readOnly = true;
 				nameInput.readOnly = false;
@@ -124,4 +125,9 @@ function updateSettings() {
 		flagP.style.display = "none";
 		flagInput.style.display = "none";
 	}
+}
+
+function flagClicked(id) {
+	selectedFlag = document.getElementById(id);
+	selectedFlag.style.border = "4px solid #01A1FE";
 }

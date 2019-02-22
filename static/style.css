@@ -1,11 +1,13 @@
 body {
-	font-family: Arial;
+	font-family: 'Roboto', sans-serif;
 	margin: 20px;
 }
 
 p {
 	white-space: pre-line;
 	font-size: 24pt;
+	margin-top: 10px;
+	margin-bottom: 10px;
 }
 
 form.inputForm {
@@ -18,6 +20,25 @@ form.inputForm {
 p.inputForm {
 	margin: 0;
 	align-self: center;
+}
+
+.flagSelector {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr;
+	row-gap: 0px;
+	grid-auto-rows: min-content;
+}
+
+img.flag {
+	width: 262;
+	height: 150;
+	border: 6px solid white;
+	transition: border 0.25s;
+}
+
+img.flag:hover {
+	border: 6px solid gray;
+	transition: border 0.25s;
 }
 
 .settings {

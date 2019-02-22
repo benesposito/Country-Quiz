@@ -6996,6 +6996,9 @@
 			"Lao People's Democratic Republic",
 			"Sathalanalat Paxathipatai Paxaxon Lao"
 		],
+		"removedSpellings": [
+			"Lao"
+		],
 		"region": "Asia",
 		"subregion": "South-Eastern Asia",
 		"languages": {"lao": "Lao"},
