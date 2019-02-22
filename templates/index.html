@@ -1,0 +1,25 @@
+<html>
+	<head>
+		<title>Countries Quiz!</title>
+		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+		<link rel="shortcut icon" href="#">
+	</head>
+	<body>
+		<form class="inputForm" action = "http://localhost:5000/read" method="post" autocomplete="off">
+			<p class="inputForm" id="nameP">Name: </p><input class="textfield" type="text" id="nameInput" oninput="submitForm()"/>
+			<p class="inputForm" id="capitalP">Capital: </p><input class="textfield" type="text" id="capitalInput" oninput="submitForm()"/>
+			<p class="inputForm" id="flagP">Flag: </p><img class="inputForm" id="flagInput" height="225" width="393">
+			<input class="inputForm" type="button" value="I don't know" onclick="idontknowclick()"/>
+		</form>
+
+		<form class="settings">
+			<p class="settings">Name</p><input class="settings" type="checkbox" id="useName" onclick="updateSettings()" checked/>
+			<p class="settings">Capital</p><input class="settings" type="checkbox" id="useCapital" onclick="updateSettings()" checked/>
+			<p class="settings">Flag</p><input class="settings" type="checkbox" id="useFlag" onclick="updateSettings()" checked/>
+		</form>
+
+		<p id="discoveredCountries"></p>
+
+		<script type="text/javascript" src="{{ url_for('static', filename='js.js') }}"></script>
+	</body>
+</html>
