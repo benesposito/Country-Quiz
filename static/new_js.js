@@ -55,7 +55,7 @@ function checkInputs() {
  		if(names.includes(formatInput(nameInput.value))) {
 			nameInput.value = currentCountry.names[0];
 			nameInput.readOnly = true;
-			nameInput.style.border = '4px solid #01FE55';
+			nameInput.style.border = '3px solid #01FE55';
 		} else
 			discovered = false;
 			
@@ -70,7 +70,7 @@ function checkInputs() {
  		if(capitals.includes(formatInput(capitalInput.value))) {
 			capitalInput.value = currentCountry.capitals[0];
 			capitalInput.readOnly = true;
-			capitalInput.style.border = '4px solid #01FE55';
+			capitalInput.style.border = '3px solid #01FE55';
 		} else
 			discovered = false;
 	}

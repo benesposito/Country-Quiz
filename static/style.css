@@ -35,6 +35,7 @@ input[type=text], input[type=number] {
 	border-radius: 4px;
 	transition: border 0.5s;
 	background-color: #303030;
+	outline:none;
 	color: white;
 }
 
@@ -70,7 +71,7 @@ img.flag:hover {
 	transition: border 0.25s;
 }
 
-.settings {
+form.settings {
 	display: grid;
 	grid-template-columns: 1fr 6fr;
 	row-gap: 5px;
@@ -83,13 +84,35 @@ p.settings {
 	margin: 0;
 }
 
+input.settings[type=checkbox] {
+	-webkit-appearance: none;
+	justify-self: start;
+	padding: 9px;
+	display: inline-block;
+	position: relative;
+	outline: none;
+	border: 1px solid white;
+	border-radius: 2px;
+	transition: border-radius 0.2s, background-color 0.2s;
+}
+
+input.settings[type=checkbox]:active, input.settings[type=checkbox]:checked:active {
+}
+
+input.settings[type=checkbox]:checked {
+	background-color: white;
+	border-radius: 15px;
+	transition: border-radius 0.2s, background-color 0.2s;
+}
+
 .textfield {
 	padding: 5px;
 	font-size: 24pt;
+	transition: border 0.2s;
 }
 
 .textfield:focus {
-	border: 2px solid #33cccc;
+	border: 2px solid #01A1FE;
 	transition: border 0.2s;
 }
 
