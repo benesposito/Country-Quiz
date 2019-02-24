@@ -15,7 +15,7 @@ sess.init_app(app)
 
 @app.route('/')
 def root():
-    with open('countries.json') as json_file:
+    with open('jsons/countries.json') as json_file:
         rawCountries = json.load(json_file)
         session['undiscoveredCountries'] = []
         
@@ -28,11 +28,11 @@ def root():
                     if code in names:
                         names.remove(code)
 
-                if 'removedAltSpellings' in country:
-                    for spelling in country['removedAltSpellings']:
+                if 'removedSpellings' in country:
+                    for spelling in country['removedSpellings']:
                         names.remove(spelling)
 
-                if 'addedAltSpellings' in country:
+                if 'addedSpellings' in country:
                     names += country['addedAltSpellings']
 
                 flag = 'static/flags/' + country['cca2'].lower() + '.png'
@@ -45,7 +45,7 @@ def root():
 
 @app.route('/getNewCountry', methods=['POST'])
 def getNewCountry():
-    if request.form['discovered'] and session.get('currentCountry') != None:
+    if request.form['discovered'] == 'true' and session.get('currentCountry') != None:
         session.get('discoveredCountries').append(session.get('currentCountry'))
         session.get('undiscoveredCountries').remove(session.get('currentCountry'))
 
@@ -60,8 +60,13 @@ def getNewCountry():
         filenames = c
 
     for i in range(int(request.form['numberOfFlags']) - 1):
-        flags.append('static/flags/' + filenames.pop(random.randint(0, len(filenames))))
+        filename = filenames.pop(random.randint(0, len(filenames) - 1))
+
+        if filename == session.get('currentCountry')['flag']:
+            filename = filenames.pop(random.randint(0, len(filenames) - 1))
+
+        flags.append('static/flags/' + filename)
 
     flags.insert(random.randint(0, len(flags)), session.get('currentCountry')['flag'])
 
-    return jsonify(country=session.get('currentCountry'), flags=flags)
+    return jsonify(country=session.get('currentCountry'), flags=flags, discoveredCountries=session.get('discoveredCountries'))

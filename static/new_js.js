@@ -6,9 +6,9 @@ var nameP = document.getElementById('nameP');
 var capitalP = document.getElementById('capitalP');
 var flagP = document.getElementById('flagP');
 
-var testName = document.getElementById('testName');
-var testCapital = document.getElementById('testCapital');
-var testFlag = document.getElementById('testFlag');
+var giveName = document.getElementById('giveName');
+var giveCapital = document.getElementById('giveCapital');
+var giveFlag = document.getElementById('giveFlag');
 var needName = document.getElementById('needName');
 var needCapital = document.getElementById('needCapital');
 var needFlag = document.getElementById('needFlag');
@@ -18,11 +18,11 @@ var flagSelector = document.getElementById('flagSelector');
 var forceUndiscovered = false;
 
 var settings = {
-	get testableInfo() {
+	get givableInfo() {
 		return {
-			name: testName.checked,
-			capital: testCapital.checked,
-			flag: testFlag.checked
+			name: giveName.checked,
+			capital: giveCapital.checked,
+			flag: giveFlag.checked
 		};
 	},
 
@@ -42,6 +42,7 @@ document.getElementById("discoveredCountries").innerHTML = "0";
 getNewCountry(false);
 
 function checkInputs() {
+	var discovered = true;
 	console.log(nameInput.value + ', ' + capitalInput.value);
 	neededInfo = settings.neededInfo;
 
@@ -56,7 +57,7 @@ function checkInputs() {
 			nameInput.readOnly = true;
 			nameInput.style.border = '4px solid #01FE55';
 		} else
-			return;
+			discovered = false;
 			
 	}
 
@@ -71,32 +72,39 @@ function checkInputs() {
 			capitalInput.readOnly = true;
 			capitalInput.style.border = '4px solid #01FE55';
 		} else
-			return;
+			discovered = false;
 	}
 
-	if(givenInfo != 'flag') {
-		if(selectedFlag) {
-			setTimeout(function() {
-				getNewCountry(selectedFlag.src == currentCountry.flag);
-			}, 250);
-		}
-	} else {
+	var timeout = 250;
+
+	if(givenInfo == 'flag' || !settings.neededInfo.flag) {
 		setTimeout(function() {
-			getNewCountry(true);
-		}, 5000);
+			if(discovered)
+				getNewCountry(true);
+		}, timeout);
+	} else {
+		if(selectedFlag) {
+			timeout = (selectedFlag.id == currentCountry.flag)? 250 : 1250;
+			console.log(timeout);
+			setTimeout(function() {
+				if(discovered)
+					getNewCountry(selectedFlag.id == currentCountry.flag);
+			}, timeout);
+		}
 	}
-
 }
 
 function getNewCountry(discovered) {
-	var testableInfo = []
-	for(info in settings.testableInfo)
-		if(settings.testableInfo[info])
-			testableInfo.push(info);
-	givenInfo = testableInfo[random(testableInfo.length)];
+	var givableInfo = []
+	for(info in settings.givableInfo)
+		if(settings.givableInfo[info])
+			givableInfo.push(info);
+	givenInfo = givableInfo[random(givableInfo.length)];
 
 	while(flagSelector.firstChild)
 		flagSelector.removeChild(flagSelector.firstChild);
+	
+	flagSelector.style.display = '';
 
 	var request = new XMLHttpRequest();
 
@@ -115,6 +123,11 @@ function getNewCountry(discovered) {
 			capitalInput.readOnly = false;
 			capitalInput.style.border = '';
 
+			var flagImage = document.createElement('img');
+			flagImage.setAttribute('src', currentCountry.flag);
+			flagImage.setAttribute('class', 'flag');
+			flagImage.setAttribute('id', 'flagInput');
+
 			switch(givenInfo) {
 			case 'name':
 				nameInput.value = currentCountry.names[0];
@@ -125,33 +138,39 @@ function getNewCountry(discovered) {
 				capitalInput.readOnly = true;
 				break;
 			case 'flag':
-				var image = document.createElement('img');
-				image.setAttribute('src', currentCountry.flag);
-				image.setAttribute('class', 'flag');
-				image.setAttribute('id', 'flagInput');
-				flagSelector.appendChild(image);
+				flagSelector.appendChild(flagImage);
+				break;
 			}
 
 			if(givenInfo != 'flag') {
-				json.flags.forEach(function(flag, i) {
-					var image = document.createElement('img');
-					image.setAttribute('src', flag);
-					image.setAttribute('class', 'flag');
-					image.setAttribute('onclick', 'selectFlag(this.id)');
-					image.setAttribute('id', flag);
-					flagSelector.appendChild(image);
-				});
+				if(settings.neededInfo.flag) {
+					json.flags.forEach(function(flag, i) {
+						var image = document.createElement('img');
+						image.setAttribute('src', flag);
+						image.setAttribute('class', 'flag');
+						image.setAttribute('onclick', 'selectFlag(this.id)');
+						image.setAttribute('id', flag);
+						flagSelector.appendChild(image);
+					});
+				} else {
+					flagSelector.appendChild(flagImage);
+
+					if(!document.getElementById('showFlagWhenNotTested').checked)
+						flagSelector.style.display = 'none';
+				}
 			}
 
             console.log('Current Country: ' + JSON.stringify(currentCountry));
 			selectedFlag = null;
+
+			if(json.discoveredCountries.length > 0)
+            	document.getElementById("discoveredCountries").innerHTML = getCountriesStr(json.discoveredCountries);
 		}
 	}
 
 	request.open("POST", "getNewCountry", true);
 	request.setRequestHeader("Content-type","application/x-www-form-urlencoded");
     request.send(`numberOfFlags=${settings.neededInfo['numberOfFlags']}&discovered=${discovered && !forceUndiscovered}`);
-	console.log(discovered && !forceUndiscovered);
 	forceUndiscovered = false;
 }
 
@@ -181,9 +200,18 @@ function selectFlag(id) {
 }
 
 function formatInput(input) {
-	return removeDiacritics(input).toLowerCase().replace('st', 'saint').replace('st.', 'saint');
+	return removeDiacritics(input).toLowerCase().replace('st', 'saint').replace('.', '').replace('-', ' ').replace(',', '');
 }
 
 function random(max) {
 	return Math.floor(Math.random() * max);
+}
+
+function getCountriesStr(countries) {
+    html = countries.length + "\n";
+
+    for(country of countries)
+        html += country.names[0] + "\n"
+
+    return html
 }

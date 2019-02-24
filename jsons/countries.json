@@ -3338,7 +3338,7 @@
 	},
 	{
 		"name": {
-			"common": "Czech Republic",
+			"common": "Czechia",
 			"official": "Czech Republic",
 			"native": {
 				"ces": { 	"official": "\u010desk\u00e1 republika",
@@ -6996,9 +6996,6 @@
 			"Lao People's Democratic Republic",
 			"Sathalanalat Paxathipatai Paxaxon Lao"
 		],
-		"removedSpellings": [
-			"Lao"
-		],
 		"region": "Asia",
 		"subregion": "South-Eastern Asia",
 		"languages": {"lao": "Lao"},
@@ -10328,7 +10325,7 @@
 		"ccn3": "275",
 		"cca3": "PSE",
 		"cioc": "PLE",
-		"independent": true,
+		"independent": false,
 		"status": "officially-assigned",
 		"currency": ["ILS"],
 		"callingCode": ["970"],
@@ -12169,9 +12166,6 @@
 			"Kingdom of Thailand",
 			"\u0e23\u0e32\u0e0a\u0e2d\u0e32\u0e13\u0e32\u0e08\u0e31\u0e01\u0e23\u0e44\u0e17\u0e22",
 			"Ratcha Anachak Thai"
-		],
-		"removedAltSpellings": [
-			"Thai"
 		],
 		"region": "Asia",
 		"subregion": "South-Eastern Asia",

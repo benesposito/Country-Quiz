@@ -16,11 +16,11 @@
 		<input class="inputForm" type="button" value="I don't know" onclick="idontknowclick()"/>
 		<input class="inputForm" type="button" value="Skip" onclick="getNewCountry(false)"/>
 
-		<p>Testable Information:</p>
+		<p>Givable Information:</p>
 		<form class="settings">
-			<p class="settings">Name</p><input class="settings" type="checkbox" id="testName" checked/>
-			<p class="settings">Capital</p><input class="settings" type="checkbox" id="testCapital" checked/>
-			<p class="settings">Flag</p><input class="settings" type="checkbox" id="testFlag" checked/>
+			<p class="settings">Name</p><input class="settings" type="checkbox" id="giveName" checked/>
+			<p class="settings">Capital</p><input class="settings" type="checkbox" id="giveCapital" checked/>
+			<p class="settings">Flag</p><input class="settings" type="checkbox" id="giveFlag" checked/>
 		</form>
 
 		<p>Needed Information:</p>
@@ -29,6 +29,11 @@
 			<p class="settings">Capital</p><input class="settings" type="checkbox" id="needCapital" checked/>
 			<p class="settings">Flag</p><input class="settings" type="checkbox" id="needFlag" checked/>
 			<p class="settings">Number of flags</p><input class="settings" type="number" value="12" id="numerOfFlags"/>
+		</form>
+
+		<p>Other Settings:</p>
+		<form class="settings">
+			<p class="settings">Show flag when not "needed" or "given"</p><input class="settings" type="checkbox" id="showFlagWhenNotTested"/>
 		</form>
 
 		<p id="discoveredCountries"></p>

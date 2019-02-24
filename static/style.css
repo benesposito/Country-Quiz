@@ -1,5 +1,7 @@
 body {
 	font-family: 'Roboto', sans-serif;
+	color: white;
+	background-color: #303030;
 	margin: 20px;
 }
 
@@ -8,6 +10,32 @@ p {
 	font-size: 24pt;
 	margin-top: 10px;
 	margin-bottom: 10px;
+}
+
+input[type=button] {
+	background-color: Transparent;
+	border: 1px solid white;
+	color: white;
+	font-size: 16pt;
+    cursor:pointer;
+    overflow: hidden;
+    outline:none;
+	transition: color 0.5s, background-color 0.5s;
+}
+
+input[type=button]:hover {
+	color: black;
+	background-color: white;
+	transition: color 0.35s, background-color 0.35s;
+}
+
+input[type=text], input[type=number] {
+	padding-left: 3px;
+	border: 2px solid white;
+	border-radius: 4px;
+	transition: border 0.5s;
+	background-color: #303030;
+	color: white;
 }
 
 form.inputForm {
@@ -20,6 +48,7 @@ form.inputForm {
 p.inputForm {
 	margin: 0;
 	align-self: center;
+	padding-right: 5px;
 }
 
 .flagSelector {
@@ -32,12 +61,12 @@ p.inputForm {
 img.flag {
 	width: 262;
 	height: 150;
-	border: 6px solid white;
+	border: 6px solid #303030;
 	transition: border 0.25s;
 }
 
 img.flag:hover {
-	border: 6px solid gray;
+	border: 6px solid #01A1FE;
 	transition: border 0.25s;
 }
 
@@ -57,12 +86,13 @@ p.settings {
 .textfield {
 	padding: 5px;
 	font-size: 24pt;
-	border: 2px solid #000000;
-	border-radius: 4px;
-	transition: border 0.5s;
 }
 
 .textfield:focus {
 	border: 2px solid #33cccc;
 	transition: border 0.2s;
+}
+
+::placeholder {
+	color: #b7b7b7;
 }
