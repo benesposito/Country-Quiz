@@ -10729,6 +10729,9 @@
 			"Kingdom of Saudi Arabia",
 			"Al-Mamlakah al-\u2018Arabiyyah as-Su\u2018\u016bdiyyah"
 		],
+		"removedSpellings": [
+			"Saudi"
+		],
 		"region": "Asia",
 		"subregion": "Western Asia",
 		"languages": {"ara": "Arabic"},
@@ -12166,6 +12169,9 @@
 			"Kingdom of Thailand",
 			"\u0e23\u0e32\u0e0a\u0e2d\u0e32\u0e13\u0e32\u0e08\u0e31\u0e01\u0e23\u0e44\u0e17\u0e22",
 			"Ratcha Anachak Thai"
+		],
+		"removedSpellings": [
+			"Thai"
 		],
 		"region": "Asia",
 		"subregion": "South-Eastern Asia",
