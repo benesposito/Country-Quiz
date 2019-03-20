@@ -29,6 +29,8 @@ def root():
                         names.remove(code)
 
                 if 'removedSpellings' in country:
+                    print(names)
+                    print(country['removedSpellings'])
                     for spelling in country['removedSpellings']:
                         names.remove(spelling)
 
@@ -62,7 +64,7 @@ def getNewCountry():
     for i in range(int(request.form['numberOfFlags']) - 1):
         filename = filenames.pop(random.randint(0, len(filenames) - 1))
 
-        if filename == session.get('currentCountry')['flag']:
+        if 'static/flags/' + filename == session.get('currentCountry')['flag']:
             filename = filenames.pop(random.randint(0, len(filenames) - 1))
 
         flags.append('static/flags/' + filename)

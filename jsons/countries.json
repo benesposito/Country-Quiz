@@ -385,6 +385,9 @@
 		"callingCode": ["971"],
 		"capital": ["Abu Dhabi"],
 		"altSpellings": ["AE", "UAE", "Emirates"],
+		"removedSpellings": [
+			
+		],
 		"region": "Asia",
 		"subregion": "Western Asia",
 		"languages": {"ara": "Arabic"},
@@ -6996,6 +6999,9 @@
 			"Lao People's Democratic Republic",
 			"Sathalanalat Paxathipatai Paxaxon Lao"
 		],
+		"removedSpellings": [
+			"Lao"
+		],
 		"region": "Asia",
 		"subregion": "South-Eastern Asia",
 		"languages": {"lao": "Lao"},
@@ -7317,7 +7323,7 @@
 		"status": "officially-assigned",
 		"currency": ["LKR"],
 		"callingCode": ["94"],
-		"capital": ["Colombo"],
+		"capital": ["Colombo", "Sri Jayawardenepura Kotte"],
 		"altSpellings": [
 			"LK",
 			"ila\u1e45kai",
@@ -8368,7 +8374,7 @@
 		"status": "officially-assigned",
 		"currency": ["MNT"],
 		"callingCode": ["976"],
-		"capital": ["Ulan Bator"],
+		"capital": ["Ulaanbaatar"],
 		"altSpellings": ["MN"],
 		"region": "Asia",
 		"subregion": "Eastern Asia",
@@ -12886,7 +12892,7 @@
 		"status": "officially-assigned",
 		"currency": ["UAH"],
 		"callingCode": ["380"],
-		"capital": ["Kyiv"],
+		"capital": ["Kiev"],
 		"altSpellings": ["UA", "Ukrayina"],
 		"region": "Europe",
 		"subregion": "Eastern Europe",

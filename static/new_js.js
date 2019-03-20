@@ -18,7 +18,7 @@ var flagSelector = document.getElementById('flagSelector');
 var forceUndiscovered = false;
 
 var settings = {
-	get givableInfo() {
+	get providedInfo() {
 		return {
 			name: giveName.checked,
 			capital: giveCapital.checked,
@@ -95,11 +95,11 @@ function checkInputs() {
 }
 
 function getNewCountry(discovered) {
-	var givableInfo = []
-	for(info in settings.givableInfo)
-		if(settings.givableInfo[info])
-			givableInfo.push(info);
-	givenInfo = givableInfo[random(givableInfo.length)];
+	var providedInfo = []
+	for(info in settings.providedInfo)
+		if(settings.providedInfo[info])
+			providedInfo.push(info);
+	givenInfo = providedInfo[random(providedInfo.length)];
 
 	while(flagSelector.firstChild)
 		flagSelector.removeChild(flagSelector.firstChild);
@@ -118,11 +118,27 @@ function getNewCountry(discovered) {
 			nameInput.readOnly = false;
 			nameInput.style.border = '';
 
+			if(!settings.neededInfo.name && givenInfo != 'capital') {
+				nameInput.style.display = 'none';
+				nameP.style.display = 'none';
+			} else {
+				nameInput.style.display = '';
+				nameP.style.display = '';
+			}
+
 			capitalInput.value = "";
 			capitalInput.placeholder = "";
 			capitalInput.readOnly = false;
 			capitalInput.style.border = '';
 
+			if(!settings.neededInfo.capital && givenInfo != 'capital') {
+				capitalInput.style.display = 'none';
+				capitalP.style.display = 'none';
+			} else {
+				capitalInput.style.display = '';
+				capitalP.style.display = '';
+			}
+			
 			var flagImage = document.createElement('img');
 			flagImage.setAttribute('src', currentCountry.flag);
 			flagImage.setAttribute('class', 'flag');
@@ -132,13 +148,24 @@ function getNewCountry(discovered) {
 			case 'name':
 				nameInput.value = currentCountry.names[0];
 				nameInput.readOnly = true;
+
+				if(settings.neededInfo.capital)
+					capitalInput.focus();
 				break;
 			case 'capital':
 				capitalInput.value = currentCountry.capitals[0];
 				capitalInput.readOnly = true;
+
+				if(settings.neededInfo.name)
+					nameInput.focus();
 				break;
 			case 'flag':
 				flagSelector.appendChild(flagImage);
+
+				if(settings.neededInfo.name)
+					nameInput.focus();
+				else if(settings.neededInfo.capital)
+					capitalInput.focus();
 				break;
 			}
 
@@ -200,7 +227,7 @@ function selectFlag(id) {
 }
 
 function formatInput(input) {
-	return removeDiacritics(input).toLowerCase().replace('st', 'saint').replace('.', '').replace('-', ' ').replace(',', '');
+	return removeDiacritics(input).toLowerCase().replace('st', 'saint').replace('.', '').replace('-', ' ').replace(' ', '-').replace("'", '');
 }
 
 function random(max) {
